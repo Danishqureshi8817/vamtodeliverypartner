@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Poppins-Bold.ttf",
+      "sha1": "875cf0cecd647bcf22e79d633d868c1b1ec98dfa"
+    },
+    {
+      "path": "src/assets/fonts/RadioCanada-Bold.ttf",
+      "sha1": "69f1391f9e71f1eace33ee8a97965d576f65eff7"
+    },
+    {
+      "path": "src/assets/fonts/RadioCanada-Light.ttf",
+      "sha1": "3fbce66521a78cf94bd812ac869aab5fa770e4e5"
+    },
+    {
+      "path": "src/assets/fonts/RadioCanada-Medium.ttf",
+      "sha1": "f2310b61412b74ad3268c1831438164b04c56343"
+    },
+    {
+      "path": "src/assets/fonts/RadioCanada-Regular.ttf",
+      "sha1": "7eb1d63381c92db2f5596f6267dc1070d39dc6a8"
+    },
+    {
+      "path": "src/assets/fonts/RadioCanada-SemiBold.ttf",
+      "sha1": "25c26eb5fcbbd410ea7866fe7dbfc70e7f66fed9"
+    }
+  ]
+}
