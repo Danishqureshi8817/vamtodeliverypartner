@@ -24,7 +24,7 @@ export default function RegisterComplete() {
   const Navigation = useNavigation<any>();
   return (
     <Container statusBarBackgroundColor='#ffffff' statusBarStyle='dark-content' backgroundColor={color.grey} >
-  
+
       <View style={styles.registrationHeader}>
         <TouchableOpacity
           onPress={() => {
@@ -39,65 +39,64 @@ export default function RegisterComplete() {
       </View>
       {/* Red banner */}
       <View style={styles.banner}>
-        <View>
-          <Text style={styles.bannerTitle}>
+        <View style={{ flex: 0.8 }}>
+          <Text style={styles.bannerTitle} numberOfLines={2}>
             Your application is under Verification
           </Text>
-          <Text style={styles.bannerSubtitle}>
+          <Text style={styles.bannerSubtitle} numberOfLines={2}>
             Account will get activated in 48hrs
           </Text>
         </View>
-        <Image style={{ width: 91, height: 91 }} resizeMode='contain' source={require("../assets/img/explert.png")} />
+        <Image style={{ width: moderateScale(90), height: moderateScale(90), }} resizeMode='contain' source={require("../assets/img/explert.png")} />
       </View>
 
       <Body >
         {/* List items */}
-        <View style={{marginTop:moderateScaleVertical(15)}}>
+        <View style={{ marginTop: moderateScaleVertical(15) }}>
 
-      
-        {[
-          { title: 'Personal Information', status: 'Approved' },
-          {
-            title: 'Personal Documents',
-            status: 'Verification Pending',
-            statusColor: 'red',
-          },
-          { title: 'Vehicle Details', status: 'Approved' },
-          {
-            title: 'Bank Account Details',
-            status: 'Approved',
-            highlighted: true,
-          },
-          { title: 'Emergency Details', status: 'Approved' },
-        ].map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.listItem,
-              item.highlighted && styles.highlightedItem,
-            ]}>
-            <View style={styles.listTextContainer}>
-              <Text style={styles.listTitle}>{item.title}</Text>
-              <Text
-                style={[
-                  styles.listStatus,
-                  { color: item.statusColor || 'green' },
-                ]}>
-                {item.status}
-              </Text>
-            </View>
-            {/* <Text style={styles.listArrow}>›</Text> */}
-            <GreaterIcon />
-          </TouchableOpacity>
-        ))}
-  </View>
-        <Button
+
+          {[
+            { title: 'Personal Information', status: 'Approved' },
+            {
+              title: 'Personal Documents',
+              status: 'Verification Pending',
+              statusColor: 'red',
+            },
+            { title: 'Vehicle Details', status: 'Approved' },
+            {
+              title: 'Bank Account Details',
+              status: 'Approved',
+              highlighted: true,
+            }
+          ].map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.listItem,
+                item.highlighted && styles.highlightedItem,
+              ]}>
+              <View style={styles.listTextContainer}>
+                <Text style={styles.listTitle}>{item.title}</Text>
+                <Text
+                  style={[
+                    styles.listStatus,
+                    { color: item.statusColor || 'green' },
+                  ]}>
+                  {item.status}
+                </Text>
+              </View>
+              {/* <Text style={styles.listArrow}>›</Text> */}
+              <GreaterIcon />
+            </TouchableOpacity>
+          ))}
+        </View>
+        {/* <Button
           onPress={() => {
             Navigation.navigate('StorePage');
           }}
           containerStyles={styles.buttonBox}
           title="Order"
-        />
+        /> */}
         {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>Need Help? </Text>
@@ -117,25 +116,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   banner: {
-    backgroundColor: '#ff4d4d',
-    padding: 20,
-    marginTop: moderateScaleVertical(80),
+    backgroundColor: color.primary,
+    paddingHorizontal: moderateScale(15),
+    marginTop: moderateScaleVertical(25),
     // alignItems: 'center',
     flexDirection: "row",
     alignItems: "center",
     width: WIDTH / 1,
-    height: moderateScale(150),
+    // height: moderateScale(150),
+    justifyContent: 'space-between',
+    paddingTop: moderateScaleVertical(35)
 
   },
   bannerTitle: {
     color: '#fff',
     fontSize: textScale(16),
     fontFamily: Fonts.Bold,
-    width: WIDTH / 1.4
+    // width: WIDTH / 1.4
   },
   bannerSubtitle: {
-
-    fontSize: textScale(18),
+    fontSize: textScale(12),
     fontFamily: Fonts.Medium,
   },
   content: {
@@ -174,7 +174,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    // padding: 20,
+    marginTop:'auto',
+    marginBottom:moderateScaleVertical(20)
   },
   footerText: {
     fontSize: 14,
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 999,
     top: 0,
-    marginTop: moderateScale(50),
+    // marginTop: moderateScale(50),
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacingSizes.larger,
@@ -211,6 +212,6 @@ const styles = StyleSheet.create({
   },
   buttonBox: {
     alignSelf: 'center',
-    marginTop:moderateScaleVertical(25)
+    marginTop: moderateScaleVertical(25)
   },
 });

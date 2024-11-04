@@ -15,7 +15,7 @@ import ConditionalRendering from './ConditionalRendering';
 import ErrorMessage from './ErrorMessage';
 import InputLabel from './InputLabel';
 import { Fonts } from '../../utils/constant';
-import { textScale } from '../../utils/responsiveSize';
+import { moderateScale, textScale } from '../../utils/responsiveSize';
 
 type InputProps = {
   label?: string;
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacingSizes.medium,
     paddingVertical: spacingSizes.medium,
     width: '100%',
-    height: 50,
+    height: moderateScale(50),
     color: colors.black,
     borderRadius: spacingSizes.smallMedium,
     fontFamily:Fonts.Regular,

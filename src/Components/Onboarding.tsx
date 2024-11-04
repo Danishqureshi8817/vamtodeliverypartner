@@ -41,7 +41,7 @@ export default function Onboarding() {
           />
 
           <View style={{ gap: moderateScale(10), marginHorizontal: moderateScale(15) }}>
-            <Text style={{ fontFamily: Fonts.Bold, fontSize: textScale(18), color: color.black, lineHeight: textScale(20) }} >Be a Adiya Food Partner</Text>
+            <Text style={{ fontFamily: Fonts.Bold, fontSize: textScale(18), color: color.black, lineHeight: textScale(20) }} >Be a Vamto Delivery Partner</Text>
             <Text style={{ fontFamily: Fonts.Bold, fontSize: textScale(28), color: color.black, lineHeight: textScale(30) }} >Get a stable monthly income</Text>
           </View>
 
