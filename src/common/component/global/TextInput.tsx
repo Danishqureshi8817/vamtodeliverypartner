@@ -29,7 +29,7 @@ function InputText(props: InputTextProps) {
   } = props;
 
   return (
-    <View style={[styles.container, { height, }]}>
+    <View style={[styles.container, { height}]}>
       {left}
       <TextInput
         placeholder={textInputProps?.placeholder ?? ""}

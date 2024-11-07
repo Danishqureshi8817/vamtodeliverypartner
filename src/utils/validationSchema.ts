@@ -19,3 +19,10 @@ export const editProfileSchema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
   // mobile: yup.string().required("Mobile number is required").matches(/^(\+91-|\+91|0)?\d{10}$/, 'Enter exactly 10 digits'),
 })
+
+export const loginSchema = yup.object().shape({
+  // lastname: yup.string().required("Last Name is required").typeError('Input must be a string'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+  // mobile: yup.string().required("Mobile number is required").matches(/^(\+91-|\+91|0)?\d{10}$/, 'Enter exactly 10 digits'),
+})

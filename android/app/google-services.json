@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "938027093193",
-    "project_id": "foodorderapp-288e4",
-    "storage_bucket": "foodorderapp-288e4.firebasestorage.app"
+    "project_number": "784836484549",
+    "project_id": "vamtodelivery",
+    "storage_bucket": "vamtodelivery.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:938027093193:android:a9ac0080a003adaf0c5118",
+        "mobilesdk_app_id": "1:784836484549:android:b267d3755b329c7066bfac",
         "android_client_info": {
-          "package_name": "com.vamtodeliverypartner"
+          "package_name": "com.vamtodelivery"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDzrexik3HRFZU6JYUytI6kLlEk5ujlbSQ"
+          "current_key": "AIzaSyCjsTFiSs_n2x3v5J3WNZzMJy5D5aQ7zSA"
         }
       ],
       "services": {

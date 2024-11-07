@@ -20,7 +20,7 @@ export default function UploadAadhar() {
   const Navigation = useNavigation<any>()
   const { registrationData, addImage, removeImage } = useRegistration();
 
-  console.log(registrationData,'lovcaaa');
+  // console.log(registrationData,'lovcaaa');
   
 
   // state

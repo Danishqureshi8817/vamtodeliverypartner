@@ -1,4 +1,4 @@
-package com.vamtodeliverypartner
+package com.vamtodelivery
 
 import android.app.Application
 import com.facebook.react.PackageList

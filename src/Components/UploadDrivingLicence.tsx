@@ -12,9 +12,11 @@ import { CameraIcon, CloseCrossIcon } from '../common/component/Icons';
 import PrimaryButton from '../common/component/global/PrimaryButton';
 import CenterModalLoader from '../common/component/global/CenterModalLoader';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { useRegistration } from '../context/registration';
 
 export default function UploadDrivingLicence() {
   const Navigation = useNavigation<any>()
+  const { registrationData, addImage, removeImage } = useRegistration();
 
   // state
   const [selectedFrontImage, setSelectedFrontImage] = useState('')
@@ -36,7 +38,7 @@ export default function UploadDrivingLicence() {
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
         // console.log(url, 'Get File URL');
-
+        addImage('drivingLicence', response?.assets[0]?.uri);
         setSelectedFrontImage(response?.assets[0]?.uri);
       }
     });
@@ -59,7 +61,7 @@ export default function UploadDrivingLicence() {
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
         // console.log(url, 'Get File URL');
-
+        addImage('drivingLicence', response?.assets[0]?.uri);
         setSelectedBackImage(response?.assets[0]?.uri);
       }
     });

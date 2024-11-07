@@ -778,3 +778,44 @@ export const MiniRightNewIcon = (props: SvgProps) => (
     />
   </Svg>
 )
+
+export const OpenEyeIcon = (props: SvgProps) => (
+  <Svg
+      width={25}
+      height={25}
+      fill="none"
+      viewBox="0 0 24 24"
+      {...props}
+  >
+      <G
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+      >
+          <Path
+              d="M22 12c-1.747 3.576-6.123 7-10 7-3.878 0-8.254-3.424-10-7M22 12c-1.747-3.576-6.122-7-10-7-3.877 0-8.254 3.423-10 7"
+              clipRule="evenodd"
+          />
+          <Path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+      </G>
+  </Svg>
+)
+
+export const CloseEyeIcon = (props: SvgProps) => (
+  <Svg
+      fill="none"
+      viewBox="0 0 24 24"
+      width={25}
+      height={25}
+      {...props}
+  >
+      <Path
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="m4 4 5.879 5.879M20 20l-5.879-5.879M9.88 9.88a3 3 0 1 0 4.243 4.243M9.878 9.878l4.242 4.242M6.768 6.768C4.728 8.1 2.964 10.026 2 12c1.746 3.576 6.122 7 10 7 1.738 0 3.575-.688 5.232-1.768M9.762 5.347A7.848 7.848 0 0 1 12 5c3.877 0 8.252 3.424 9.999 7-.552 1.13-1.366 2.245-2.345 3.241"
+      />
+  </Svg>
+)

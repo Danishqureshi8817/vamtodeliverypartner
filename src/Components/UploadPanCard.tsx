@@ -14,8 +14,12 @@ import { CameraIcon, CloseCrossIcon } from '../common/component/Icons';
 import PrimaryButton from '../common/component/global/PrimaryButton';
 import { launchImageLibrary } from 'react-native-image-picker';
 import CenterModalLoader from '../common/component/global/CenterModalLoader';
+import { useRegistration } from '../context/registration';
 export default function UploadPanCard() {
   const Navigation = useNavigation<any>()
+  const { registrationData, addImage, removeImage } = useRegistration();
+  // console.log({registrationData},'lk');
+  
 
   // state
   const [selectedFrontImage, setSelectedFrontImage] = useState('')
@@ -33,7 +37,7 @@ export default function UploadPanCard() {
         console.log('ImagePicker Error: ', response.error);
       } else {
         console.log(response?.assets[0]);
-
+        addImage('pencard', response?.assets[0]?.uri);
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
         // console.log(url, 'Get File URL');
@@ -56,7 +60,7 @@ export default function UploadPanCard() {
         console.log('ImagePicker Error: ', response.error);
       } else {
         console.log(response?.assets[0]);
-
+        addImage('pencard', response?.assets[0]?.uri);
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
         // console.log(url, 'Get File URL');

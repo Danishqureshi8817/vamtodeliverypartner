@@ -1,3 +1,5 @@
+export const serverBaseURL = 'http://192.168.29.232:4578/api';
+
 export enum Fonts {
     Regular = 'RadioCanada-Regular',
     Medium = 'RadioCanada-Medium',

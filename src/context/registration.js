@@ -10,7 +10,7 @@ const initialState = {
   ifscCode: '',
   accountNumber: '',
   upiId: '',
-  drivingLIcence: [], // array of image URIs
+  drivingLicence: [], // array of image URIs
   diverRc: '', // image URI
   vehiclePlate: '', // image URI
   adharCardNumber: [], // array of image URIs
@@ -145,8 +145,8 @@ export const RegistrationProvider = ({ children }) => {
     }
 
     // Document validation
-    if (state.drivingLIcence.length === 0) {
-      errors.drivingLIcence = 'Driving license images required';
+    if (state.drivingLicence.length === 0) {
+      errors.drivingLicence = 'Driving license images required';
     }
     if (!state.diverRc) errors.diverRc = 'Driver RC image required';
     if (!state.vehiclePlate) errors.vehiclePlate = 'Vehicle plate image required';

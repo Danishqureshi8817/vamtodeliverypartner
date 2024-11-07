@@ -38,7 +38,7 @@ export default function PersonalInformation() {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: { name: '', mobile: '', paymentType: '', bankName: '', ifscCode: '', accountNumber: '', upiId: '', vehicleDetails: '', location: [0, 0], email: '', password: '' },
-    // validationSchema: personalInfoSchema,
+    validationSchema: personalInfoSchema,
     onSubmit: values => {
       if (!(!!selectedUpiType)) {
         errorToast('Please select payment type')
@@ -47,7 +47,7 @@ export default function PersonalInformation() {
         console.log(values);
         updateField('name',formik?.values?.name)
         updateField('mobile',formik?.values?.mobile)
-        updateField('paymentType',formik?.values?.paymentType)
+        updateField('paymentType',selectedUpiType)
         updateField('bankName',formik?.values?.bankName)
         updateField('ifscCode',formik?.values?.ifscCode)
         updateField('accountNumber',formik?.values?.accountNumber)
@@ -136,16 +136,16 @@ export default function PersonalInformation() {
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(15) }}>
             <Pressable onPress={() => setSelectedUpiType('upi')} style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(8) }}>
-              <View style={{ borderWidth: 1, width: moderateScale(25), height: moderateScale(25), borderRadius: moderateScale(20), alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ backgroundColor: selectedUpiType === 'upi' ? color.primary : 'transparent', width: '75%', height: '75%', borderRadius: moderateScale(20) }}>
+              <View style={{ borderWidth: 1, width: moderateScale(25), height: moderateScale(25), borderRadius: moderateScale(20), alignItems: 'center', justifyContent: 'center',overflow:'hidden' }}>
+                <View style={{ backgroundColor: selectedUpiType === 'upi' ? color.primary : 'transparent', width: '75%', height: '75%', borderRadius: moderateScale(25) }}>
                 </View>
               </View>
               <Text style={{ color: '#000', fontFamily: Fonts.Medium, fontSize: textScale(14), marginVertical: moderateScaleVertical(5) }}>Upi</Text>
             </Pressable>
 
             <Pressable onPress={() => setSelectedUpiType('bank')} style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(8) }}>
-              <View style={{ borderWidth: 1, width: moderateScale(25), height: moderateScale(25), borderRadius: moderateScale(20), alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ backgroundColor: selectedUpiType === 'bank' ? color.primary : 'transparent', width: '75%', height: '75%', borderRadius: moderateScale(20) }}>
+              <View style={{ borderWidth: 1, width: moderateScale(25), height: moderateScale(25), borderRadius: moderateScale(20), alignItems: 'center', justifyContent: 'center',overflow:'hidden' }}>
+                <View style={{ backgroundColor: selectedUpiType === 'bank' ? color.primary : 'transparent', width: '75%', height: '75%', borderRadius: moderateScale(25) }}>
                 </View>
               </View>
               <Text style={{ color: '#000', fontFamily: Fonts.Medium, fontSize: textScale(14), marginVertical: moderateScaleVertical(5) }}>Bank</Text>

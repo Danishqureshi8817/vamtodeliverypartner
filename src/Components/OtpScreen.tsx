@@ -14,16 +14,27 @@ import Button from '../common/component/Button';
 import {fontSizes, spacingSizes} from '../common/consts/size';
 import {WIDTH, HEIGHT} from '../common/consts/config';
 // import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import { Container } from '../common/component/global/Container';
 import { AppBar } from '../common/component/global/AppBar';
 import { moderateScale, moderateScaleVertical, textScale } from '../utils/responsiveSize';
 import { Fonts } from '../utils/constant';
 import PrimaryButton from '../common/component/global/PrimaryButton';
+import useVerifyOtp from '../hooks/auth/verify-otp';
 export default function OtpScreen() {
+
+  // init
   const Navigation = useNavigation<any>();
-  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
+  const route = useRoute()
+  const {email} :any= route?.params
   const inputs = useRef<Array<TextInput | null>>([]);
+
+  // state
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
+
+  // api
+  const useVerifyOtpMutation = useVerifyOtp()
+
 
   const handleChangeText = (text: string, index: number) => {
     const newOtp = [...otp];
@@ -54,7 +65,20 @@ export default function OtpScreen() {
   const handleVerifyOtp = () => {
     const enteredOtp = otp.join('');
     console.log('Entered OTP:', enteredOtp);
-    Navigation.navigate("PersonalInformation")
+
+    const payload = {
+      email:email,
+      otp:enteredOtp
+    }
+
+    useVerifyOtpMutation.mutate(payload,{
+      onSuccess : (data) => {
+        console.log(data?.data);
+        
+      }
+    })
+
+    Navigation.navigate("Onboarding")
   };
   return (
     <Container statusBarBackgroundColor='#ffffff' statusBarStyle='dark-content' >
@@ -63,7 +87,7 @@ export default function OtpScreen() {
      
       <Text style={styles.title}>Enter OTP to verify</Text>
       <Text style={styles.subtitle}>
-        A 6 digit OTP has been sent to your phone number +91 9999988888
+        A 6 digit OTP has been sent to your email {email}
         <Text style={styles.changeText}>  Change</Text>
       </Text>
       <Text style={styles.otpText}>Enter OTP Text</Text>

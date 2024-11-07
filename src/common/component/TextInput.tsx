@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import color from '../consts/color';
 import colors from '../consts/color';
-import {fontFamily, fontSizes, spacingSizes} from '../consts/size';
+import { fontFamily, fontSizes, spacingSizes } from '../consts/size';
 import ConditionalRendering from './ConditionalRendering';
 import ErrorMessage from './ErrorMessage';
 import InputLabel from './InputLabel';
@@ -40,10 +40,10 @@ export default function Input(props: InputProps) {
     inputStyle,
     error,
   } = props;
-  
+
   return (
     <View style={[styles.container, containerStyles]}>
-   { !!label &&  <InputLabel 
+      {!!label && <InputLabel
         labelStyles={error ? styles.labelError : null}
         label={label}
       />}
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     height: moderateScale(50),
     color: colors.black,
     borderRadius: spacingSizes.smallMedium,
-    fontFamily:Fonts.Regular,
-    fontSize:textScale(14)
+    fontFamily: Fonts.Regular,
+    fontSize: textScale(14)
   },
   textInputError: {
     flexDirection: 'row',

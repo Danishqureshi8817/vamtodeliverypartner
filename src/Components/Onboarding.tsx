@@ -16,14 +16,57 @@ import { height, moderateScale, moderateScaleVertical, textScale } from '../util
 import { Fonts } from '../utils/constant';
 import PrimaryButton from '../common/component/global/PrimaryButton';
 import Orders from './Orders';
+import useUserLogin from '../hooks/auth/login';
+import { useFormik } from 'formik';
+import { loginSchema } from '../utils/validationSchema';
+import InputText from '../common/component/global/InputText';
+import { CloseEyeIcon, OpenEyeIcon } from '../common/component/Icons';
 
 export default function Onboarding() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const Navigation = useNavigation<any>();
+  const [secureText, setSecureText] = useState(false)
+  const navigation = useNavigation<any>();
+
+  const RightEye = () => {
+    return (
+      <Pressable onPress={() => setSecureText(!secureText)} style={{ paddingRight: moderateScale(10) }}>
+        {secureText ? <CloseEyeIcon /> : <OpenEyeIcon />}
+      </Pressable>
+    )
+  }
 
   const handleCheckboxToggle = () => {
     setIsChecked(!isChecked);
   };
+
+  //api
+  const useUserLoginMutation = useUserLogin()
+
+  // formik
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: { email: '', password: '' },
+    validationSchema: loginSchema,
+    onSubmit: values => {
+      console.log(values);
+
+      const payload = {
+        email: formik.values.email,
+        password: formik.values.password
+      }
+
+      // useUserLoginMutation.mutate(payload, {
+      //   onSuccess: (data) => {
+      //     console.log(data?.data);
+
+      //   }
+      // })
+      navigation.navigate('BottomTab')
+      // navigation.navigate('OtpScreen',{email:formik?.values?.email})
+
+    }
+
+  })
 
   return (
     <Container fullScreen={true} statusBarStyle='light-content' statusBarBackgroundColor={'transparent'}>
@@ -49,21 +92,44 @@ export default function Onboarding() {
 
 
         <View style={styles.mainBox}>
-          <Input
-            containerStyles={styles.inputBox}
-            // label="Enter Email"
-            inputProps={{ placeholder: 'Enter your email' }}
-          />
+          <View>
+            <Input
+              containerStyles={styles.inputBox}
+              // label="Enter Email"
+              value={formik.values.email}
+              onChangeText={formik.handleChange('email')}
+              inputProps={{
+                onBlur: formik.handleBlur('email'),
+                keyboardType: 'number-pad',
+                placeholder: 'Enter your email'
 
-          <Input
-            containerStyles={styles.inputBox}
-            // label="Enter Password"
-            inputProps={{ placeholder: 'Enter your password' }}
-          />
+              }}
+            />
+            {(formik.errors.email && formik.touched.email) ? <Text style={{ fontFamily: Fonts.Regular, color: 'red', fontSize: textScale(12) }}>{formik.errors.email}</Text> : null}
+          </View>
+
+          <View>
+            <InputText
+              textInputProps={{
+                value: formik.values.password,
+                onChangeText: formik.handleChange('password'),
+                onBlur: formik.handleBlur('password'),
+                keyboardType: 'number-pad',
+                placeholder: 'Enter your password'
+
+              }}
+              right={<RightEye />}
+              secureTextEntry={secureText}
+            />
+            {(formik.errors.password && formik.touched.password) ? <Text style={{ fontFamily: Fonts.Regular, color: 'red', fontSize: textScale(12) }}>{formik.errors.password}</Text> : null}
+          </View>
+
+
+
 
         </View>
 
-        <PrimaryButton buttonText='Login' onPress={() => { Navigation.navigate('OtpScreen'); }} marginHorizontal={moderateScale(15)} borderRadius={moderateScale(30)} />
+        <PrimaryButton buttonText='Login' onPress={formik.handleSubmit} loading={useUserLoginMutation?.isPending} disabled={useUserLoginMutation?.isPending} marginHorizontal={moderateScale(15)} borderRadius={moderateScale(30)} />
 
         <View style={styles.termsContainer}>
           {/* <CheckBox
@@ -71,15 +137,15 @@ export default function Onboarding() {
               onValueChange={handleCheckboxToggle}
               tintColors={{ true: '#1e90ff', false: '#A3A3A3' }}
             /> */}
-            <View style={{flexDirection:'row',alignItems:'center',gap:moderateScale(8)}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(8) }}>
             <Text style={styles.termsText}>
-            Don't have an account?  
-          </Text>
-          <Pressable onPress={()=> Navigation.navigate('PersonalInformation')}>
+              Don't have an account?
+            </Text>
+            <Pressable onPress={() => navigation.navigate('PersonalInformation')}>
 
-          <Text style={styles.linkText}>Sign Up</Text>
-          </Pressable>
-            </View>
+              <Text style={styles.linkText}>Sign Up</Text>
+            </Pressable>
+          </View>
 
         </View>
       </Body>
@@ -120,8 +186,8 @@ const styles = StyleSheet.create({
   mainBox: {
     // marginTop: spacingSizes.medium,
     paddingHorizontal: moderateScale(15),
-    gap:moderateScaleVertical(15),
-    marginVertical:moderateScaleVertical(10)
+    gap: moderateScaleVertical(15),
+    marginVertical: moderateScaleVertical(10)
     // marginTop: moderateScaleVertical(-5)
   },
   inputBox: {

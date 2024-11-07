@@ -118,6 +118,10 @@ export default function StorePage() {
           </View>
         </View>
 
+        <View style={{backgroundColor:'rgba(255,89,99,0.1)',height:moderateScale(60)}}>
+
+        </View>
+
 
       </View>
       <Pressable onPress={()=>{setSelectedOrderId('11')}} style={{ alignSelf: 'center',paddingBottom:moderateScaleVertical(15) }} >

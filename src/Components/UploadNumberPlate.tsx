@@ -14,13 +14,56 @@ import { CameraIcon, CloseCrossIcon } from '../common/component/Icons';
 import PrimaryButton from '../common/component/global/PrimaryButton';
 import CenterModalLoader from '../common/component/global/CenterModalLoader';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { useRegistration } from '../context/registration';
+import useUserRegister from '../hooks/auth/registration';
 
 export default function UploadNumberPlate() {
   const Navigation = useNavigation<any>()
+  const { registrationData, addImage,updateField, removeImage } = useRegistration();
 
   // state
   const [selectedFrontImage, setSelectedFrontImage] = useState('')
   const [selectedBackImage, setSelectedBackImage] = useState('')
+
+  // api
+  const useUserRegisterMutation = useUserRegister()
+
+  // console.log(registrationData?.pencard,'kklklk');
+  
+
+  const handleUserRegistration = () => {
+
+    const payload = {
+      name: registrationData?.name ?? 'N/A', // String
+      mobile: Number(registrationData?.mobile), // Number
+      paymentType: registrationData?.paymentType ?? 'N/A', // Example array of strings
+      bankName: registrationData?.bankName ?? 'N/A', // String
+      ifscCode: registrationData?.ifscCode ?? 'N/A', // String
+      accountNumber: registrationData?.accountNumber ?? 'N/A', // String
+      upiId: registrationData?.upiId ?? 'N/A', // String
+      drivingLIcence: registrationData?.drivingLicence ?? 'N/A', // Array of strings (images)
+      diverRc: registrationData?.diverRc ?? 'N/A', // String (image)
+      vehiclePlate: registrationData?.vehiclePlate ?? 'N/A', // String (image)
+      adharCardNumber: registrationData?.adharCardNumber ?? 'N/A', // Array of strings (images)
+      vehicleDetails: registrationData?.vehicleDetails ?? 'N/A', // String (details about the vehicle)
+      pencard: registrationData?.pencard ?? 'N/A', // Array of strings (images)
+      location:registrationData?.location,
+      email: registrationData?.email ?? 'N/A', // String
+      password: registrationData?.password ?? 'N/A' // String
+  };
+
+  console.log(payload,'ppp');
+  
+
+  useUserRegisterMutation.mutate(payload,{
+    onSuccess : (data) => {
+      console.log(data?.data);
+
+
+    }
+  })
+  }
+
 
   const handleUploadFront = async () => {
 
@@ -38,6 +81,7 @@ export default function UploadNumberPlate() {
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
         // console.log(url, 'Get File URL');
+        updateField('diverRc', response?.assets[0]?.uri);
         setSelectedFrontImage(response?.assets[0]?.uri)
 
         // setSelectedImage(response?.assets[0]?.uri);
@@ -58,6 +102,7 @@ export default function UploadNumberPlate() {
         console.log('ImagePicker Error: ', response.error);
       } else {
         console.log(response?.assets[0]);
+        updateField('vehiclePlate', response?.assets[0]?.uri);
         setSelectedBackImage(response?.assets[0]?.uri)
         // uploadFileFireBase(filename,pathURL)
         // const url = await uploadFileFireBase(response.assets[0]?.fileName, response?.assets[0]?.uri)
@@ -90,7 +135,7 @@ export default function UploadNumberPlate() {
               source={{ uri: selectedFrontImage }}
             />
           </View>}
-        { !(!!selectedFrontImage) && <TouchableOpacity onPress={handleUploadFront} style={styles.border}>
+          {!(!!selectedFrontImage) && <TouchableOpacity onPress={handleUploadFront} style={styles.border}>
             <View style={styles.uploadContainer} >
               <CameraIcon />
               <Text style={styles.uploadText}>Upload</Text>
@@ -116,7 +161,7 @@ export default function UploadNumberPlate() {
               source={{ uri: selectedBackImage }}
             />
           </View>}
-        { !(!!selectedBackImage) && <TouchableOpacity onPress={handleUploadBack} style={styles.border}>
+          {!(!!selectedBackImage) && <TouchableOpacity onPress={handleUploadBack} style={styles.border}>
             <View style={styles.uploadContainer} >
               <CameraIcon />
               <Text style={styles.uploadText}>Upload</Text>
@@ -133,7 +178,7 @@ export default function UploadNumberPlate() {
 
       </View>
       {/* <Button onPress={() => { Navigation.navigate("ViewDocument") }} title="Submit" containerStyles={styles.submitButton} /> */}
-      <PrimaryButton onPress={() => { Navigation.navigate('RegisterComplete') }} buttonText='Submit' borderRadius={moderateScale(30)} marginVertical={moderateScaleVertical(15)} marginHorizontal={moderateScale(15)} />
+      <PrimaryButton onPress={() => { handleUserRegistration()}} loading={useUserRegisterMutation?.isPending} disabled={useUserRegisterMutation?.isPending} buttonText='Submit' borderRadius={moderateScale(30)} marginVertical={moderateScaleVertical(15)} marginHorizontal={moderateScale(15)} />
 
       <CenterModalLoader loading={false} />
     </Container>
