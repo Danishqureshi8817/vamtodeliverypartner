@@ -15,7 +15,6 @@ import PrimaryButton from '../common/component/global/PrimaryButton';
 import CenterModalLoader from '../common/component/global/CenterModalLoader';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useRegistration } from '../context/registration';
-import useUserRegister from '../hooks/auth/registration';
 
 export default function UploadNumberPlate() {
   const Navigation = useNavigation<any>()
@@ -24,9 +23,6 @@ export default function UploadNumberPlate() {
   // state
   const [selectedFrontImage, setSelectedFrontImage] = useState('')
   const [selectedBackImage, setSelectedBackImage] = useState('')
-
-  // api
-  const useUserRegisterMutation = useUserRegister()
 
   // console.log(registrationData?.pencard,'kklklk');
   
@@ -53,15 +49,6 @@ export default function UploadNumberPlate() {
   };
 
   console.log(payload,'ppp');
-  
-
-  useUserRegisterMutation.mutate(payload,{
-    onSuccess : (data) => {
-      console.log(data?.data);
-
-
-    }
-  })
   }
 
 
@@ -178,7 +165,7 @@ export default function UploadNumberPlate() {
 
       </View>
       {/* <Button onPress={() => { Navigation.navigate("ViewDocument") }} title="Submit" containerStyles={styles.submitButton} /> */}
-      <PrimaryButton onPress={() => { handleUserRegistration()}} loading={useUserRegisterMutation?.isPending} disabled={useUserRegisterMutation?.isPending} buttonText='Submit' borderRadius={moderateScale(30)} marginVertical={moderateScaleVertical(15)} marginHorizontal={moderateScale(15)} />
+      <PrimaryButton onPress={() => { handleUserRegistration()}}  buttonText='Submit' borderRadius={moderateScale(30)} marginVertical={moderateScaleVertical(15)} marginHorizontal={moderateScale(15)} />
 
       <CenterModalLoader loading={false} />
     </Container>

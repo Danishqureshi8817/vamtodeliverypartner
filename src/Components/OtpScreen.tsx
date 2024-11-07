@@ -20,7 +20,7 @@ import { AppBar } from '../common/component/global/AppBar';
 import { moderateScale, moderateScaleVertical, textScale } from '../utils/responsiveSize';
 import { Fonts } from '../utils/constant';
 import PrimaryButton from '../common/component/global/PrimaryButton';
-import useVerifyOtp from '../hooks/auth/verify-otp';
+
 export default function OtpScreen() {
 
   // init
@@ -31,9 +31,6 @@ export default function OtpScreen() {
 
   // state
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
-
-  // api
-  const useVerifyOtpMutation = useVerifyOtp()
 
 
   const handleChangeText = (text: string, index: number) => {
@@ -70,13 +67,6 @@ export default function OtpScreen() {
       email:email,
       otp:enteredOtp
     }
-
-    useVerifyOtpMutation.mutate(payload,{
-      onSuccess : (data) => {
-        console.log(data?.data);
-        
-      }
-    })
 
     Navigation.navigate("Onboarding")
   };
